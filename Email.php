@@ -136,7 +136,7 @@ class Email
     public static function printRecaptcha()
     {
         $recaptcha = new Recaptcha();
-        if ($recaptcha->theme !== NULL) {
+        if ($recaptcha->theme !== '') {
             echo "<script>var RecaptchaOptions = {theme : '" .
                 "{$recaptcha->theme}'};</script>\n";
         }

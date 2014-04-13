@@ -5,16 +5,14 @@ namespace FRTemplate\Configuration;
 /**
  * Present the relevant server configuration of the site.
  */
-class Webserver extends Base
+class Webserver
 {
     const CONFIG_SECTION = 'Webserver';
 
     public function __construct()
     {
-        parent::__construct();
+        $ini = Base::getIni(self::CONFIG_SECTION);
 
-        $this->mod_rewrite = (bool)$this->ini[self::CONFIG_SECTION]['mod_rewrite'];
-
-        unset($this->ini);
+        $this->mod_rewrite = (bool)$ini['mod_rewrite'];
     }
 }

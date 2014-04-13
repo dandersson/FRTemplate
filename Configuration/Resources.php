@@ -5,20 +5,18 @@ namespace FRTemplate\Configuration;
 /**
  * Present site resources defined in the configuration.
  */
-class Resources extends Base
+class Resources
 {
     const CONFIG_SECTION = 'Resource';
 
     public function __construct()
     {
-        parent::__construct();
+        $ini = Base::getIni(self::CONFIG_SECTION);
 
-        $this->css = $this->ini[self::CONFIG_SECTION]['css'];
+        $this->css = $ini['css'];
 
-        $this->logoImg = $this->ini[self::CONFIG_SECTION]['logo_img'];
-        $this->logoImgWidth = $this->ini[self::CONFIG_SECTION]['logo_img_width'];
-        $this->logoImgHeight = $this->ini[self::CONFIG_SECTION]['logo_img_height'];
-
-        unset($this->ini);
+        $this->logoImg = $ini['logo_img'];
+        $this->logoImgWidth = $ini['logo_img_width'];
+        $this->logoImgHeight = $ini['logo_img_height'];
     }
 }
