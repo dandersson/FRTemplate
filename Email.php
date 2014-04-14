@@ -21,7 +21,6 @@ class Email
         $this->returnPage = $return_page;
         $config = new Configuration\Email();
         $this->destination = $config->destination;
-        $this->recaptcha = new Recaptcha();
         $this->setEmailParameters();
     }
 
@@ -99,8 +98,9 @@ class Email
         if ($this->isSpamLike($text)) {
             if (isset($_POST[CSR::CHALLENGE_FIELD]) &&
                 isset($_POST[CSR::RESPONSE_FIELD])) {
+                $recaptcha = new Recaptcha();
                 $recaptcha_answer = recaptcha_check_answer(
-                    $this->recaptcha->private_key,
+                    $recaptcha->private_key,
                     $_SERVER['REMOTE_ADDR'],
                     $_POST[CSR::CHALLENGE_FIELD],
                     $_POST[CSR::RESPONSE_FIELD]
@@ -128,19 +128,6 @@ class Email
                 $_POST[CSE::MAIL_STATUS] === CSE::RECAPTCHA_FAIL
             )
         );
-    }
-
-    /**
-     * Print the reCaptcha form.
-     */
-    public static function printRecaptcha()
-    {
-        $recaptcha = new Recaptcha();
-        if ($recaptcha->theme !== '') {
-            echo "<script>var RecaptchaOptions = {theme : '" .
-                "{$recaptcha->theme}'};</script>\n";
-        }
-        echo recaptcha_get_html($recaptcha->public_key);
     }
 
     /**

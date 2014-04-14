@@ -13,9 +13,9 @@ class Recaptcha
     {
         $ini = Base::getIni(self::CONFIG_SECTION);
 
-        $this->lib = $ini['lib'];
+        $this->libdir = $ini['libdir'];
         $this->public_key = $ini['public_key'];
         $this->private_key = $ini['private_key'];
-        $this->theme = array_key_exists('theme', $ini) ? $ini['theme'] : '';
+        $this->theme = array_key_exists('theme', $ini) ? $ini['theme'] : NULL;
     }
 }
