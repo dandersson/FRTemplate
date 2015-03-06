@@ -3,7 +3,7 @@
 namespace FRTemplate\Constants;
 
 /**
- * Define email related site constants.
+ * Define e-mail related site constants.
  */
 class Email
 {
@@ -14,10 +14,10 @@ class Email
     const SUBJECT = 'subject';
     const BODY = 'body';
 
-    const MAIL_STATUS = 'status';
-    const MAIL_OK = 'mail_ok';
-    const MAIL_FAIL = 'mail_fail';
-    const MAIL_EMPTY = 'mail_empty';
+    const EMAIL_STATUS = 'status';
+    const EMAIL_OK = 'email_ok';
+    const EMAIL_FAIL = 'email_fail';
+    const EMAIL_EMPTY = 'email_empty';
     const SPAM_TEST = 'spam_test';
     const RECAPTCHA_FAIL = 'recaptcha_fail';
     const CURL_FAIL = 'curl_fail';

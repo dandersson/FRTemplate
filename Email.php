@@ -29,21 +29,21 @@ class Email
      */
     public function send()
     {
-        empty($this->body) and $this->returnToPage(CSE::MAIL_EMPTY);
+        empty($this->body) and $this->returnToPage(CSE::EMAIL_EMPTY);
         $this->recaptchaCheckText($_POST[CSE::BODY]);
 
-        // Only if the mail server does not respond at all, the die() clause
-        // will be triggered. In case the mail can't be sent due to
-        // circumstances later in the chain, the mail server is responsible for
-        // error handling.
+        // Only if the e-mail server does not respond at all, the die() clause
+        // will be triggered. In case the e-mail can't be sent due to
+        // circumstances later in the chain, the e-mail server is responsible
+        // for error handling.
         mail($this->destination, $this->subject, $this->body, $this->header) or
-            die($this->returnToPage(CSE::MAIL_FAIL));
+            die($this->returnToPage(CSE::EMAIL_FAIL));
 
-        $this->returnToPage(CSE::MAIL_OK);
+        $this->returnToPage(CSE::EMAIL_OK);
     }
 
     /**
-     * Build headers and mail content from user supplied data.
+     * Build headers and e-mail content from user supplied data.
      */
     private function setEmailParameters()
     {
@@ -88,9 +88,9 @@ class Email
      */
     private function recaptchaCheckText($text)
     {
-        // If someone really wants to spam, there is not much hindering them 
-        // since the have the mail address anyway. To counter bots trying to 
-        // abuse the form, reCAPTCHA <http://www.google.com/recaptcha> 
+        // If someone really wants to spam, there is not much hindering them
+        // since the have the e-mail address anyway. To counter bots trying to
+        // abuse the form, reCAPTCHA <http://www.google.com/recaptcha>
         // validation is forced upon messages that are deemed spam like.
         $sleep_time = 5;
         // Need strict type comparison here. See the manual:
@@ -122,16 +122,16 @@ class Email
     public static function isRecaptchaRequested()
     {
         return (
-            isset($_POST[CSE::MAIL_STATUS]) &&
+            isset($_POST[CSE::EMAIL_STATUS]) &&
             (
-                $_POST[CSE::MAIL_STATUS] === CSE::SPAM_TEST ||
-                $_POST[CSE::MAIL_STATUS] === CSE::RECAPTCHA_FAIL
+                $_POST[CSE::EMAIL_STATUS] === CSE::SPAM_TEST ||
+                $_POST[CSE::EMAIL_STATUS] === CSE::RECAPTCHA_FAIL
             )
         );
     }
 
     /**
-     * Utility function to return to page with mail data intact for the user.
+     * Utility function to return to page with e-mail data intact for the user.
      */
     private function returnToPage($status)
     {
@@ -140,7 +140,7 @@ class Email
             CSE::REPLYTO => $_POST[CSE::REPLYTO],
             CSE::SUBJECT => $_POST[CSE::SUBJECT],
             CSE::BODY => $_POST[CSE::BODY],
-            CSE::MAIL_STATUS => $status
+            CSE::EMAIL_STATUS => $status
         ];
 
         // Note that GET parameters come with several limitations in length in
@@ -164,7 +164,7 @@ class Email
                 header('Location: ' .
                     URL::addHttpQuery(
                         $this->returnPage,
-                        http_build_query([CSE::MAIL_STATUS => CSE::CURL_FAIL]
+                        http_build_query([CSE::EMAIL_STATUS => CSE::CURL_FAIL]
                         )
                     )
                 )
