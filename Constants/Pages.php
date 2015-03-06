@@ -13,4 +13,6 @@ class Pages
 
     const PAGE = 'page';
     const LANGUAGE = 'language';
+
+    const LONG_POSTFIX = '-long';
 }

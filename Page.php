@@ -35,6 +35,16 @@ class Page
         }
 
         $this->title = $site->pages[$this->page][$this->language];
+        // If we have a configuration entry e.g. index[sv-long], this can be
+        // used as an alternate title to keep e.g. the navigation entry short,
+        // but the site title long. if the `*-long` key is not present,
+        // seamlessly present the default title as the `longTitle` attribute.
+        $this->longTitle =
+            array_key_exists(
+                $this->language . FRCP::LONG_POSTFIX, $site->pages[$this->page]
+            ) ?
+            $site->pages[$this->page][$this->language . FRCP::LONG_POSTFIX] :
+            $this->title;
 
         $this->preprocess = FRCP::PREPROCESS_INC . "$this->page.php";
         if (!file_exists($this->preprocess)) {
