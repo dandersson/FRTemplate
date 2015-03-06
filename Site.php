@@ -21,8 +21,6 @@ class Site
         $page_config = new Configuration\Pages();
         $this->pages = $page_config->pages;
 
-        $this->resource = new Configuration\Resources();
-
         $rss = new Configuration\RSS();
         if ($rss->rss !== NULL) {$this->rss = $rss->rss;}
 
