@@ -50,6 +50,11 @@ class Page
         if (!file_exists($this->preprocess)) {
             $this->preprocess = NULL;
         }
+
+        $this->postprocess = FRCP::POSTPROCESS_INC . "$this->page.php";
+        if (!file_exists($this->postprocess)) {
+            $this->postprocess = NULL;
+        }
     }
 
     /**
@@ -62,6 +67,7 @@ class Page
         require FRCP::TEMPLATE_INC . 'header.php';
         require $this->file;
         require FRCP::TEMPLATE_INC . 'footer.php';
+        $this->postprocess === NULL or require($this->postprocess);
     }
 
     /**
