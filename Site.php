@@ -25,6 +25,9 @@ class Site
         if ($rss->rss !== NULL) {$this->rss = $rss->rss;}
 
         $this->webserver = new Configuration\Webserver();
+
+        $custom = new Configuration\Custom($this->language);
+        $this->custom = $custom->custom;
     }
 
     /**
