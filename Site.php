@@ -37,6 +37,10 @@ class Site
     {
         if ($language === '') {$language = $this->language;}
         if ($this->webserver->mod_rewrite) {
+            // Sample `mod_rewrite` rules for the current configuration:
+            //
+            //     RewriteEngine on
+            //     RewriteRule ^([a-z]{2})-([a-z]+)/?$ index.php?page=$2&language=$1 [L,QSA]
             return "$language-$page";
         } else {
             return '?' . http_build_query([
