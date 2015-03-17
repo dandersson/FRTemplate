@@ -11,9 +11,10 @@ class Custom
 
     public function __construct($language='')
     {
-        $ini = Base::getIni(self::CONFIG_SECTION);
-
         $this->custom = [];
+
+        if (!$ini = Base::getIni(self::CONFIG_SECTION)) {return false;}
+
         foreach (array_keys($ini) as $custom_entry) {
             if (isset($ini[$custom_entry][$language])) {
                 $this->custom[$custom_entry] = $ini[$custom_entry][$language];
