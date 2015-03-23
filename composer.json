@@ -1,0 +1,24 @@
+{
+    "name": "dandersson/frtemplate",
+    "description": "Small web-site framework.",
+    "homepage": "https://github.com/dandersson/FRTemplate",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Daniel Andersson",
+            "homepage": "http://510x.se/"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/dandersson/FRTemplate"
+    },
+    "require": {
+        "google/recaptcha": "~1.1",
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "FRTemplate\\": "src/"
+        }
+    }
+}
