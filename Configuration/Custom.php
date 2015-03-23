@@ -5,19 +5,18 @@ namespace FRTemplate\Configuration;
 /**
  * Retrieve and present custom variables.
  */
-class Custom
+class Custom extends Base
 {
-    const CONFIG_SECTION = 'Custom';
-
     public function __construct($language='')
     {
+        parent::__construct();
+
         $this->custom = [];
-
-        if (!$ini = Base::getIni(self::CONFIG_SECTION)) {return false;}
-
-        foreach (array_keys($ini) as $custom_entry) {
-            if (isset($ini[$custom_entry][$language])) {
-                $this->custom[$custom_entry] = $ini[$custom_entry][$language];
+        if ($this->ini !== null) {
+            foreach (array_keys($this->ini) as $key) {
+                if (isset($this->ini[$key][$language])) {
+                    $this->custom[$key] = $this->ini[$key][$language];
+                }
             }
         }
     }

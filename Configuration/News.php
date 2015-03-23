@@ -5,20 +5,18 @@ namespace FRTemplate\Configuration;
 /**
  * Present the database structure of the news section.
  */
-class News
+class News extends Base
 {
-    const CONFIG_SECTION = 'News';
-
     public function __construct()
     {
-        $ini = Base::getIni(self::CONFIG_SECTION);
+        parent::__construct();
 
-        $this->table = $ini['table'];
-        $this->dateColumn = $ini['date_column'];
-        $this->titleColumn = $ini['title_column'];
-        $this->bodyColumn = $ini['body_column'];
-        $this->itemNumberTable = $ini['item_number_table'];
-        $this->itemNumberColumn = $ini['item_number_column'];
-        $this->sectionTitle = $ini['section_title'];
+        $this->table = $this->ini['table'];
+        $this->dateColumn = $this->ini['date_column'];
+        $this->titleColumn = $this->ini['title_column'];
+        $this->bodyColumn = $this->ini['body_column'];
+        $this->itemNumberTable = $this->ini['item_number_table'];
+        $this->itemNumberColumn = $this->ini['item_number_column'];
+        $this->sectionTitle = $this->ini['section_title'];
     }
 }

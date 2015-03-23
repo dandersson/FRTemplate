@@ -5,18 +5,16 @@ namespace FRTemplate\Configuration;
 /**
  * Present the database configuration of the site.
  */
-class DB
+class DB extends Base
 {
-    const CONFIG_SECTION = 'DB';
-
     public function __construct()
     {
-        $ini = Base::getIni(self::CONFIG_SECTION);
+        parent::__construct();
 
-        $this->host = $ini['host'];
-        $this->username = $ini['username'];
-        $this->password = $ini['password'];
-        $this->database = $ini['database'];
-        $this->charset = $ini['charset'];
+        $this->host = $this->ini['host'];
+        $this->username = $this->ini['username'];
+        $this->password = $this->ini['password'];
+        $this->database = $this->ini['database'];
+        $this->charset = $this->ini['charset'];
     }
 }

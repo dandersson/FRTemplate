@@ -5,29 +5,27 @@ namespace FRTemplate\Configuration;
 /**
  * Retrieve and present the site configuration.
  */
-class Site
+class Site extends Base
 {
-    const CONFIG_SECTION = 'Site';
-
     public function __construct($language='')
     {
-        $ini = Base::getIni(self::CONFIG_SECTION);
+        parent::__construct();
 
-        $this->siteTitle = $ini['title'];
+        $this->siteTitle = $this->ini['title'];
 
-        $this->startPage = $ini['start_page'];
-        $this->defaultLanguage = $ini['languages'][0];
+        $this->startPage = $this->ini['start_page'];
+        $this->defaultLanguage = $this->ini['languages'][0];
 
         $this->validLanguage =
-            in_array($language, $ini['languages']) ?
+            in_array($language, $this->ini['languages']) ?
                 $language :
                 $this->defaultLanguage;
 
-        $this->languageLinkAlt = $ini['language_link_alt'];
-        $this->languageLinkText = $ini['language_link_text'];
+        $this->languageLinkAlt = $this->ini['language_link_alt'];
+        $this->languageLinkText = $this->ini['language_link_text'];
 
-        $this->contactWebmaster = $ini['contact_webmaster'][$this->validLanguage];
-        $this->metaDescription = $ini['meta_description'][$this->validLanguage];
-        $this->metaKeywords = $ini['meta_keywords'][$this->validLanguage];
+        $this->contactWebmaster = $this->ini['contact_webmaster'][$this->validLanguage];
+        $this->metaDescription = $this->ini['meta_description'][$this->validLanguage];
+        $this->metaKeywords = $this->ini['meta_keywords'][$this->validLanguage];
     }
 }

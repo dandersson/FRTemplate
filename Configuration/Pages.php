@@ -5,16 +5,14 @@ namespace FRTemplate\Configuration;
 /**
  * Return an array of the pages defined in the configuration.
  */
-class Pages
+class Pages extends Base
 {
-    const CONFIG_SECTION = 'Pages';
-
     public function __construct()
     {
-        $ini = Base::getIni(self::CONFIG_SECTION);
+        parent::__construct();
 
-        foreach ($ini['pages'] as $page) {
-            foreach ($ini[$page] as $language => $title) {
+        foreach ($this->ini['pages'] as $page) {
+            foreach ($this->ini[$page] as $language => $title) {
                 $this->pages[$page][$language] = $title;
             }
         }

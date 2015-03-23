@@ -5,14 +5,12 @@ namespace FRTemplate\Configuration;
 /**
  * Present interface to email settings.
  */
-class Email
+class Email extends Base
 {
-    const CONFIG_SECTION = 'Email';
-
     public function __construct()
     {
-        $ini = Base::getIni(self::CONFIG_SECTION);
+        parent::__construct();
 
-        $this->destination = $ini['destination'];
+        $this->destination = $this->ini['destination'];
     }
 }

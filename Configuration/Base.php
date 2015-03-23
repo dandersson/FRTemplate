@@ -3,16 +3,20 @@
 namespace FRTemplate\Configuration;
 
 /**
- * Read configuration files.
+ * Read INI-style configuration files.
  */
-class Base
+abstract class Base
 {
     /**
-     * Present wanted configuration section from corresponding file.
+     * Present wanted configuration from corresponding file.
      */
-    public static function getIni($config_section)
+    public function __construct($parse_sections = false)
     {
-        $config_file = 'config/' . mb_strtolower($config_section) . '.ini.php';
-        return file_exists($config_file) ? parse_ini_file($config_file) : NULL;
+        // Return the class name without the namespace qualifier.
+        $class_name = substr(static::class, strrpos(static::class, '\\') + 1);
+        $config_file = 'config/' . mb_strtolower($class_name) . '.ini.php';
+        $this->ini = file_exists($config_file) ?
+            parse_ini_file($config_file, $parse_sections) :
+            null;
     }
 }
