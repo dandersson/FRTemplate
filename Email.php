@@ -84,7 +84,7 @@ class Email
     }
 
     /**
-     * Perform reCaptcha test if text is deemed spam like.
+     * Perform reCaptcha test if text is deemed spam-like.
      */
     private function recaptchaCheckText($text)
     {
@@ -96,16 +96,13 @@ class Email
         // Need strict type comparison here. See the manual:
         // <http://php.net/function.stripos>.
         if ($this->isSpamLike($text)) {
-            if (isset($_POST[CSR::CHALLENGE_FIELD]) &&
-                isset($_POST[CSR::RESPONSE_FIELD])) {
-                $recaptcha = new Recaptcha();
-                $recaptcha_answer = recaptcha_check_answer(
-                    $recaptcha->private_key,
-                    $_SERVER['REMOTE_ADDR'],
-                    $_POST[CSR::CHALLENGE_FIELD],
-                    $_POST[CSR::RESPONSE_FIELD]
+            if (isset($_POST[CSR::RESPONSE_FIELD])) {
+                $recaptcha = new \FRTemplate\Recaptcha();
+                $recaptcha_answer = $recaptcha->recaptcha->verify(
+                    $_POST[CSR::RESPONSE_FIELD],
+                    $_SERVER['REMOTE_ADDR']
                 );
-                if (!$recaptcha_answer->is_valid) {
+                if (!$recaptcha_answer->isSuccess()) {
                     sleep($sleep_time);
                     $this->returnToPage(CSE::RECAPTCHA_FAIL);
                 }

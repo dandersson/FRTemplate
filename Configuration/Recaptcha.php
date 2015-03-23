@@ -11,11 +11,7 @@ class Recaptcha extends Base
     {
         parent::__construct();
 
-        $this->libdir = $this->ini['libdir'];
         $this->public_key = $this->ini['public_key'];
         $this->private_key = $this->ini['private_key'];
-        $this->theme = array_key_exists('theme', $this->ini) ?
-            $this->ini['theme'] :
-            null;
     }
 }
